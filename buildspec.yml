@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18  # Use the Node.js version you need
+    commands:
+      - echo "Installing dependencies..."
+      - npm install  # Install dependencies from package.json
+
+  build:
+    commands:
+      - echo "Building the application..."
+      - npm run build || echo "No build step needed" # Skip if not required
+
+  post_build:
+    commands:
+      - echo "Build completed. Preparing for deployment..."
+      - npm prune --production  # Remove dev dependencies (optional)
+
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
