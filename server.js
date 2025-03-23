@@ -1,16 +1,29 @@
+// server.js (Node.js + Express backend)
 const express = require("express");
-const path = require("path");
-
+const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 5000;
 
-// Serve static files from the "public" folder
-app.use(express.static(path.join(__dirname, "public")));
+// Middleware
+app.use(express.json());
+app.use(cors());
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+let tasks = [];
+
+// API Routes
+app.get("/tasks", (req, res) => {
+  res.json(tasks);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.post("/tasks", (req, res) => {
+  const newTask = { id: Date.now().toString(), text: req.body.text };
+  tasks.push(newTask);
+  res.json(newTask);
 });
+
+app.delete("/tasks/:id", (req, res) => {
+  tasks = tasks.filter(task => task.id !== req.params.id);
+  res.json({ message: "Task deleted" });
+});
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
