@@ -1,101 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>To-Do List</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      text-align: center;
-      margin: 50px;
-    }
-    h1 {
-      color: #333;
-    }
-    .container {
-      max-width: 400px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    input {
-      width: 80%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-    button {
-      background-color: #28a745;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    button:hover {
-      background-color: #218838;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      background: #fff;
-      padding: 10px;
-      margin: 5px 0;
-      display: flex;
-      justify-content: space-between;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .delete-btn {
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .delete-btn:hover {
-      background-color: #c82333;
-    }
-  </style>
-  <script>
-    async function fetchTasks() {
-      const res = await fetch("http://localhost:5000/tasks");
-      const tasks = await res.json();
-      document.getElementById("taskList").innerHTML = tasks.map(task => `<li>${task.text} <button class="delete-btn" onclick="deleteTask('${task.id}')">X</button></li>`).join("");
-    }
-
-    async function addTask() {
-      const text = document.getElementById("taskInput").value;
-      if (text.trim() === "") return;
-      await fetch("http://localhost:5000/tasks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
-      });
-      document.getElementById("taskInput").value = "";
-      fetchTasks();
-    }
-
-    async function deleteTask(id) {
-      await fetch(`http://localhost:5000/tasks/${id}`, { method: "DELETE" });
-      fetchTasks();
-    }
-
-    window.onload = fetchTasks;
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Node.js App</title>
 </head>
 <body>
-  <div class="container">
-    <h1>To-Do List</h1>
-    <input type="text" id="taskInput" placeholder="Enter task" />
-    <button onclick="addTask()">Add</button>
-    <ul id="taskList"></ul>
-  </div>
+    <h1>Hello, World!</h1>
+    <p>Welcome to your simple Node.js app with HTML support.</p>
 </body>
 </html>
+    
